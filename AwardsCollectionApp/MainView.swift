@@ -27,7 +27,7 @@ struct MainView: View {
             if showAward {
                 SwiftLogoView()
                     .frame(width: 250, height: 250)
-                    .transition(.leadingSlide)
+                    .transition(.scaleSlide)
                     .rotationEffect(.degrees(showAward ? 0 : 180))
             }
             Spacer()
@@ -44,10 +44,10 @@ struct MainView: View {
 }
 
 extension AnyTransition {
-    static var leadingSlide: AnyTransition {
-        let insertion = AnyTransition.move(edge: .leading)
-            .combined(with: .scale)
-        let removal = AnyTransition.scale
+    static var scaleSlide: AnyTransition {
+        let insertion = AnyTransition.scale
+            .combined(with: .opacity)
+        let removal = AnyTransition.slide
             .combined(with: .opacity)
         return .asymmetric(insertion: insertion, removal: removal)
     }
